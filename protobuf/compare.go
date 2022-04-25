@@ -14,15 +14,28 @@
    limitations under the License.
 */
 
-package fieldpath
+package protobuf
 
 import (
-	"github.com/containerd/containerd/protobuf/plugin"
-	"github.com/gogo/protobuf/proto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/google/go-cmp/cmp"
+	"google.golang.org/protobuf/proto"
 )
 
-// Enabled returns true if E_Fieldpath is enabled
-func Enabled(file *descriptor.FileDescriptorProto, message *descriptor.DescriptorProto) bool {
-	return proto.GetBoolExtension(message.Options, plugin.E_Fieldpath, proto.GetBoolExtension(file.Options, plugin.E_FieldpathAll, false))
-}
+var Compare = cmp.FilterValues(
+	func(x, y interface{}) bool {
+		_, xok := x.(proto.Message)
+		_, yok := y.(proto.Message)
+		return xok && yok
+	},
+	cmp.Comparer(func(x, y interface{}) bool {
+		vx, ok := x.(proto.Message)
+		if !ok {
+			return false
+		}
+		vy, ok := y.(proto.Message)
+		if !ok {
+			return false
+		}
+		return proto.Equal(vx, vy)
+	}),
+)
