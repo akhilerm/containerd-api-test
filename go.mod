@@ -12,7 +12,10 @@ require (
 	google.golang.org/protobuf v1.28.1
 )
 
-require github.com/prometheus/procfs v0.8.0 // indirect
+require (
+	github.com/prometheus/procfs v0.8.0 // indirect
+	golang.org/x/net v0.5.0 // indirect
+)
 
 replace github.com/opencontainers/runtime-tools => github.com/opencontainers/runtime-tools v0.0.0-20221026201742-946c877fa809
 
