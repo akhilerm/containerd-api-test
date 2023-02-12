@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/containerd/ttrpc v1.1.1-0.20230127163717-32fab2374638
-	github.com/containerd/typeurl v1.0.3-0.20220422153119-7f6e6d160d67
+	github.com/containerd/typeurl/v2 v2.1.0
 	github.com/google/go-cmp v0.5.9
 	github.com/sirupsen/logrus v1.9.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
